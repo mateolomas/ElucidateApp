@@ -6,11 +6,11 @@ const Text: FC<Props> = props => {
   return (
     <NBText
       style={{
-        fontFamily: 'Raleway',
+        fontFamily: 'Raleway-Regular',
         fontStyle: 'normal',
         fontWeight: '500',
         fontSize: 16,
-        marginVertical: 4,
+        marginVertical: 1,
         textAlign: 'center',
       }}
       {...props}>

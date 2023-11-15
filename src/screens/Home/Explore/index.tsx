@@ -1,9 +1,6 @@
-import { Avatar, Icon } from '@rneui/base';
+import {Avatar, Icon} from '@rneui/base';
 import React from 'react';
-import {
-  ScrollView,
-  TouchableOpacity
-} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native';
 import CircularProgress from 'react-native-circular-progress-indicator';
 import Text from 'src/components/Text';
 import View from 'src/components/View';
@@ -12,10 +9,10 @@ const Explore = ({navigation}: {navigation: any}) => {
   const [selected, setSelected] = React.useState(0);
   return (
     <View style={{flex: 1, position: 'relative'}}>
-      <View style={{flex: 1, backgroundColor: '#258A79'}}>
+      <View style={{backgroundColor: '#258A79'}}>
         <View
           style={{
-            marginTop: 70,
+            marginTop: 30,
           }}>
           <UserHeader onPress={() => navigation.navigate('Profile')} />
         </View>
@@ -78,12 +75,14 @@ const Explore = ({navigation}: {navigation: any}) => {
             </View>
           </TouchableOpacity>
         </View>
-        <ScrollView horizontal>
-          {generateDays(
-            (day: number) => () => {
-              navigation.navigate('CalendarScreen');
-            },
-          )}
+        <ScrollView
+          horizontal
+          style={{
+            marginVertical: 10,
+          }}>
+          {generateDays((day: number) => () => {
+            navigation.navigate('CalendarScreen');
+          })}
         </ScrollView>
       </View>
 
@@ -112,6 +111,18 @@ const Explore = ({navigation}: {navigation: any}) => {
             isSelected={false}
             onPress={() => {}}
           />
+          <CategoryCard
+            key={4}
+            title={'TOFEL EXAM'}
+            isSelected={false}
+            onPress={() => {}}
+          />
+          <CategoryCard
+            key={5}
+            title={'TOFEL EXAM'}
+            isSelected={false}
+            onPress={() => {}}
+          />
         </ScrollView>
       </View>
     </View>
@@ -131,7 +142,7 @@ export const UserHeader = ({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: 20,
-        marginVertical: 10,
+        marginVertical: 6,
       }}>
       <View style={{flexDirection: 'row', gap: 10}}>
         <TouchableOpacity onPress={onPress}>
@@ -148,7 +159,7 @@ export const UserHeader = ({
             alignContent: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{color: color}}>Hi, User</Text>
+          <Text style={{color: color, fontFamily: 'Poppins-Regular'}}>Hi, User</Text>
           <Text style={{color: color}}>Lets's learn together</Text>
         </View>
       </View>
@@ -174,7 +185,7 @@ const Tabs = () => {
   return (
     <View
       style={{
-        marginVertical: 15,
+        marginVertical: 6,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -190,9 +201,9 @@ const Tabs = () => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          marginHorizontal: 4,
+          marginHorizontal: 2,
           gap: 10,
-          padding: 10,
+          padding: 8,
           borderRadius: 40,
           backgroundColor: 'black',
         }}>
@@ -233,6 +244,18 @@ export const CategoryCard = ({
   isSelected: boolean;
   onPress: () => void;
 }) => {
+  const tworandomBetween30and40 = () => {
+    return {
+      one: Math.floor(Math.random() * 40) + 30,
+      two: Math.floor(Math.random() * 40) + 30,
+    };
+  };
+  const {one, two} = tworandomBetween30and40();
+
+  const randomColorInHex = () => {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  };
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View
@@ -245,14 +268,14 @@ export const CategoryCard = ({
         }}>
         <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
           <CircularProgress
-            value={76}
+            value={one}
             radius={25}
             progressValueStyle={{fontWeight: '300', color: 'yellow'}}
             duration={2000}
             progressValueColor={'black'}
             maxValue={100}
-            activeStrokeColor={'#F16A4B'}
-            inActiveStrokeColor={'#9b59b6'}
+            activeStrokeWidth={3}
+            activeStrokeColor={randomColorInHex()}
             inActiveStrokeOpacity={0.2}
             valueSuffix={'%'}
           />
@@ -265,12 +288,27 @@ export const CategoryCard = ({
               }}>
               {title}
             </Text>
-            <Text
+            <View
               style={{
-                color: '#76EF83',
+                flexDirection: 'row',
+                gap: 1,
+
               }}>
-              Over due, Nov 30, 2022
-            </Text>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-Regular',
+                  color: randomColorInHex(),
+                }}>
+                Over due,
+              </Text>
+              <Text
+                style={{
+                  fontFamily: 'Poppins-Regular',
+                  fontWeight: '100',
+                }}>
+                {" "} Nov 30, 2022
+              </Text>
+            </View>
           </View>
         </View>
         <View
@@ -281,22 +319,33 @@ export const CategoryCard = ({
           <View
             style={{
               left: -20,
+              padding: 0,
+              borderWidth: 2,
+              borderRadius: 50,
+              borderColor: 'white',
             }}>
             <Avatar
               size={36}
               rounded
-              source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
+              source={{
+                uri: `https://randomuser.me/api/portraits/men/${one}.jpg`,
+              }}
               containerStyle={{backgroundColor: '#6733b9'}}
             />
           </View>
           <View
             style={{
               position: 'absolute',
+              borderWidth: 2,
+              borderRadius: 50,
+              borderColor: 'white',
             }}>
             <Avatar
               size={36}
               rounded
-              source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
+              source={{
+                uri: `https://randomuser.me/api/portraits/men/${two}.jpg`,
+              }}
               containerStyle={{backgroundColor: '#6733b9'}}
             />
           </View>

@@ -149,7 +149,7 @@ export const UserHeader = ({
           <Avatar
             size={64}
             rounded
-            source={{uri: 'https://randomuser.me/api/portraits/men/36.jpg'}}
+            source={{uri: 'https://randomuser.me/api/portraits/men/32.jpg'}}
             containerStyle={{backgroundColor: '#6733b9'}}
           />
         </TouchableOpacity>
@@ -159,8 +159,8 @@ export const UserHeader = ({
             alignContent: 'center',
             justifyContent: 'center',
           }}>
-          <Text style={{color: color, fontFamily: 'Poppins-Regular'}}>Hi, User</Text>
-          <Text style={{color: color}}>Lets's learn together</Text>
+          <Text style={{color: color, fontSize: 18}}>Hi, Sebas</Text>
+          <Text style={{color: color, fontSize: 16}}>Lets's learn together</Text>
         </View>
       </View>
       <View
